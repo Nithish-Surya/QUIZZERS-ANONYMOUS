@@ -1,0 +1,106 @@
+body {
+  margin: 0;
+}
+
+#instructions {
+  position: absolute;
+  color: #666;
+  bottom: 0;
+  padding-bottom: 6px;
+  font-family: sans-serif;
+  width: 100%;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* ── NAV ── */
+.nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: clamp(12px, 2vw, 24px) clamp(16px, 3vw, 48px);
+  box-sizing: border-box;
+}
+
+.nav ul {
+  padding: 0;
+  margin: 0;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 3vw, 60px);
+}
+
+.nav li {
+  font-family: "Lato", sans-serif;
+  font-weight: 900; 
+  color: white;
+  font-style: normal;
+  font-size: clamp(12px, 1.6vw, 50px);
+  list-style: none;
+  display: inline-block;
+  letter-spacing: 0.04em;
+  
+  
+  transition: transform 0.2s ease-in-out; 
+  
+ 
+  cursor: pointer; 
+}
+
+
+.nav li:hover {
+  transform: scale(1.1); 
+}
+
+.nav-link a {
+  color: white;
+  text-decoration: none;
+}
+
+.nav a {
+  text-decoration: none;
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+}
+
+/* ── REGISTER BUTTON ── */
+.reg {
+  border-radius: 10rem;
+  background-color: #0071e3;
+  border: none;
+  padding: clamp(8px, 0.8vw, 12px) clamp(18px, 2vw, 32px);
+  font-size: clamp(12px, 1.6vw, 18px);
+  font-family: "Lato", sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  height: auto;
+  width: auto;
+  cursor: pointer;
+  white-space: nowrap;
+  
+  
+  transition: transform 0.2s ease-in-out;
+}
+
+
+.reg:hover {
+  transform: scale(1.05); 
+}
+
+.reg a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+#logo {
+  width: clamp(40px, 5vw, 80px);
+  height: auto;
+}

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="imsge/png" href="logo.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --border: #222222;
+      --accent: #ffffff;
+      --muted: #666666;
+      --radius: 4px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--accent);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 3rem 2rem 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      letter-spacing: 0.08em;
+      line-height: 1;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 5rem;
+    }
+
+    .hero h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 5vw, 4rem);
+      letter-spacing: 0.08em;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      max-width: 750px;
+      margin: 0 auto;
+      color: var(--muted);
+      line-height: 1.9;
+      font-size: 1rem;
+    }
+
+    .section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .section h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 1rem;
+    }
+
+    .section p {
+      color: #cfcfcf;
+      line-height: 1.9;
+      font-size: 0.95rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin: 3rem 0;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .quote {
+      text-align: center;
+      margin: 4rem auto;
+      max-width: 800px;
+    }
+
+    .quote p {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      letter-spacing: 0.05em;
+      line-height: 1.3;
+    }
+
+    .quote span {
+      display: block;
+      margin-top: 1rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
+    @media (max-width: 768px) {
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      main {
+        padding: 2rem 1rem;
+      }
+
+      .section {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ABOUT US</h1>
+</header>
+
+<main>
+
+  <section class="hero">
+    <h2>QUIZZERS ANONYMOUS</h2>
+    <p>
+      The premier quiz club of the College of Engineering Guindy, Anna University,
+      dedicated to cultivating curiosity, celebrating knowledge, and building a
+      vibrant community of thinkers.
+    </p>
+  </section>
+
+  <section class="section">
+    <h3>Our Story</h3>
+    <p>
+      Founded as the premier quiz club of College of Engineering Guindy,
+      Anna University, Quizzers Anonymous has been fostering a culture of
+      learning and intellectual curiosity for years. What began as a gathering
+      of enthusiastic quizzers has grown into one of the most active student
+      communities on campus.
+    </p>
+    <br>
+    <p>
+      We believe that questioning is the beginning of wisdom. Every quiz,
+      discussion, and event we conduct is designed to inspire exploration,
+      encourage critical thinking, and make learning an enjoyable experience.
+    </p>
+  </section>
+
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-number">100+</div>
+      <div class="stat-label">Quiz Events</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-number">1000+</div>
+      <div class="stat-label">Participants</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-number">∞</div>
+      <div class="stat-label">Curiosity</div>
+    </div>
+  </div>
+
+  <section class="section">
+    <h3>What We Do</h3>
+    <p>
+      Our club organizes regular quiz competitions, knowledge-sharing sessions,
+      workshops, and some of the most prestigious quiz events in Chennai.
+      Through these initiatives, we create opportunities for students to
+      challenge themselves, learn from one another, and engage with a wide
+      variety of subjects.
+    </p>
+    <br>
+    <p>
+      From literature to science, sports to entertainment, history to current
+      affairs, we cover every domain imaginable. Whether you're a seasoned
+      quizzer or someone taking their first step into the world of trivia,
+      there is always a place for you in Quizzers Anonymous.
+    </p>
+  </section>
+
+  <section class="quote">
+    <p>
+      “Questioning is the beginning of wisdom.”
+    </p>
+    <span>Quizzers Anonymous</span>
+  </section>
+
+</main>
+
+<footer>
+  &copy;2026 QUIZZERS ANONYMOUS · All rights reserved
+</footer>
+
+</body>
+</html>

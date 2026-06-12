@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" type="imsge/png" href="logo.png">
+    <title>Register — Quizzers Anonymous</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #000;
+            color: #fff;
+            font-family: "Lato", sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .card-header {
+            border-bottom: 1px solid #fff;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+
+        .card-header p {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.4;
+            margin-bottom: 6px;
+        }
+
+        .card-header h1 {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .field { margin-bottom: 16px; }
+
+        .field label {
+            display: block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.4;
+            margin-bottom: 8px;
+        }
+
+        .field input {
+            width: 100%;
+            background: #000;
+            border: 1px solid rgba(255,255,255,0.4);
+            color: #fff;
+            font-family: "Lato", sans-serif;
+            font-size: 14px;
+            padding: 12px 14px;
+            outline: none;
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+
+        .field input::placeholder { color: rgba(255,255,255,0.2); }
+        .field input:focus { border-color: #fff; box-shadow: 0 0 0 1px #fff; }
+
+        button {
+            width: 100%;
+            background: #fff;
+            border: 1px solid #fff;
+            color: #000;
+            font-family: "Lato", sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 13px;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.15s, color 0.15s;
+        }
+
+        button:hover { background: #000; color: #fff; }
+
+        #msg {
+            margin-top: 16px;
+            font-size: 12px;
+            letter-spacing: 0.06em;
+            opacity: 0.6;
+            text-align: center;
+            min-height: 18px;
+        }
+
+        #msg.error { opacity: 1; text-decoration: underline; }
+
+        .card-footer {
+            margin-top: 24px;
+            text-align: center;
+        }
+
+        .card-footer a {
+            font-size: 12px;
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 1px;
+            transition: color 0.15s, border-color 0.15s;
+        }
+
+        .card-footer a:hover { color: #fff; border-color: #fff; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="card-header">
+            <p>Quizzers Anonymous</p>
+            <h1>Register</h1>
+        </div>
+
+        <div class="field">
+            <label for="name">Name</label>
+            <input id="name" type="text" placeholder="Your full name">
+        </div>
+
+        <div class="field">
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="you@example.com">
+        </div>
+
+        <div class="field">
+            <label for="pswd">Password</label>
+            <input id="pswd" type="password" placeholder="••••••••">
+        </div>
+
+        <button onclick="register()">Create Account</button>
+
+        <p id="msg"></p>
+
+        <div class="card-footer">
+            <a href="login.html">Already have an account?</a>
+        </div>
+    </div>
+
+    <script>
+        const SERVER_URL = "";
+
+        document.addEventListener("keydown", e => { if (e.key === "Enter") register(); });
+
+        async function register() {
+            const msg  = document.getElementById("msg");
+            const user = {
+                name:     document.getElementById("name").value,
+                email:    document.getElementById("email").value,
+                password: document.getElementById("pswd").value
+            };
+
+            msg.className = "";
+            msg.innerText = "Creating account...";
+
+            const response = await fetch(`${SERVER_URL}/register`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(user)
+            });
+
+            const result = await response.json();
+
+            if (result.userId) {
+                msg.className = "";
+                msg.innerText = "Account created — redirecting to login...";
+                setTimeout(() => { window.location.replace("login.html"); }, 2000);
+            } else {
+                msg.className = "error";
+                msg.innerText = result.error;
+            }
+        }
+    </script>
+</body>
+</html>

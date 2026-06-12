@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" type="imsge/png" href="logo.png">
+    <title>Admin Panel — Quizzers Anonymous</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #000;
+            color: #fff;
+            font-family: "Lato", sans-serif;
+            font-size: 14px;
+            min-height: 100vh;
+            padding: 40px;
+        }
+
+        header {
+            border-bottom: 1px solid #fff;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+
+        header p {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.4;
+            margin-bottom: 6px;
+        }
+
+        header h1 {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        section { margin-bottom: 48px; }
+
+        .section-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            opacity: 0.4;
+            margin-bottom: 16px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            background: #000;
+            border: 1px solid #fff;
+            color: #fff;
+            font-family: "Lato", sans-serif;
+            font-size: 13px;
+            padding: 9px 14px;
+            outline: none;
+            width: 240px;
+        }
+
+        input::placeholder { color: rgba(255,255,255,0.3); }
+        input:focus { box-shadow: 0 0 0 1px #fff; }
+
+        button {
+            background: #000;
+            border: 1px solid #fff;
+            color: #fff;
+            font-family: "Lato", sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 9px 20px;
+            cursor: pointer;
+            transition: background 0.15s, color 0.15s;
+        }
+
+        button:hover { background: #fff; color: #000; }
+
+        .btn-primary { background: #fff; color: #000; }
+        .btn-primary:hover { background: #000; color: #fff; }
+
+        .btn-ghost {
+            border-color: rgba(255,255,255,0.3);
+            color: rgba(255,255,255,0.5);
+            font-size: 11px;
+            padding: 6px 14px;
+        }
+        .btn-ghost:hover { background: #fff; color: #000; border-color: #fff; }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        #availableEvents {
+            list-style: none;
+            margin-top: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        #availableEvents li {
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+            letter-spacing: 0.04em;
+        }
+
+        #availableEvents li button {
+            border: none;
+            padding: 0;
+            font-size: 10px;
+            opacity: 0.4;
+            background: transparent;
+        }
+
+        #availableEvents li button:hover {
+            background: transparent;
+            color: #fff;
+            opacity: 1;
+        }
+
+        .table-wrapper { overflow-x: auto; margin-top: 20px; }
+
+        table { width: 100%; border-collapse: collapse; }
+
+        thead tr { border-bottom: 1px solid #fff; }
+
+        th {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.5;
+            padding: 10px 14px;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 13px 14px;
+            font-size: 13px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            vertical-align: middle;
+        }
+
+        tbody tr:hover td { background: rgba(255,255,255,0.04); }
+
+        select {
+            background: #000;
+            border: 1px solid rgba(255,255,255,0.4);
+            color: #fff;
+            font-family: "Lato", sans-serif;
+            font-size: 12px;
+            padding: 6px 28px 6px 10px;
+            outline: none;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23ffffff'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+        }
+
+        select:focus { border-color: #fff; }
+
+        hr { border: none; border-top: 1px solid rgba(255,255,255,0.12); margin: 40px 0; }
+
+        footer {
+            border-top: 1px solid rgba(255,255,255,0.15);
+            margin-top: 48px;
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        footer span {
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <p>Quizzers Anonymous</p>
+        <h1>Admin Panel</h1>
+    </header>
+
+    <section>
+        <p class="section-label">Manage Events</p>
+        <div class="controls">
+            <input id="newEventName" type="text" placeholder="Event name">
+            <button class="btn-primary" onclick="addEvent()">Add Event</button>
+        </div>
+        <ul id="availableEvents"></ul>
+    </section>
+
+    <hr>
+
+    <section>
+        <p class="section-label">Registered Users</p>
+        <div class="controls">
+            <input id="searchId" type="number" placeholder="Search by User ID">
+            <button onclick="searchUser()">Search</button>
+            <button onclick="loadAllUsers()">Show All</button>
+            <button class="btn-primary" onclick="exportToCSV()">Export CSV</button>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>User ID</th>
+                        <th>Event</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody"></tbody>
+            </table>
+        </div>
+    </section>
+
+    <footer>
+        <span>Quizzers Anonymous &mdash; Admin</span>
+        <button class="btn-ghost" onclick="logout()">Logout</button>
+    </footer>
+
+    <script>
+        const SERVER_URL = "";
+        let currentUsers = [];
+
+        loadAvailableEvents();
+        loadAllUsers();
+
+        async function loadAvailableEvents() {
+            const response = await fetch(`${SERVER_URL}/get-events`);
+            const result   = await response.json();
+            const list = document.getElementById("availableEvents");
+            list.innerHTML = "";
+
+            if (result.events.length === 0) {
+                list.innerHTML = "<li>No events yet</li>";
+                return;
+            }
+
+            result.events.forEach(ev => {
+                const li = document.createElement("li");
+                li.innerHTML = `${ev.event_name} <button onclick="deleteEvent('${ev.event_name}')">✕ Remove</button>`;
+                list.appendChild(li);
+            });
+        }
+
+        async function addEvent() {
+            const event_name = document.getElementById("newEventName").value.trim();
+            if (!event_name) { alert("Please enter an event name!"); return; }
+
+            const response = await fetch(`${SERVER_URL}/add-event`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ event_name })
+            });
+            const result = await response.json();
+
+            if (result.message) {
+                document.getElementById("newEventName").value = "";
+                alert(`"${event_name}" added!`);
+                loadAvailableEvents();
+            } else {
+                alert("Error: " + result.error);
+            }
+        }
+
+        async function deleteEvent(event_name) {
+            if (!confirm(`Delete "${event_name}"?`)) return;
+
+            const response = await fetch(`${SERVER_URL}/delete-event`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ event_name })
+            });
+            const result = await response.json();
+            if (result.message) { loadAvailableEvents(); }
+            else { alert("Error: " + result.error); }
+        }
+
+        async function loadAllUsers() {
+            document.getElementById("searchId").value = "";
+            const response = await fetch(`${SERVER_URL}/get-all-users`);
+            const result   = await response.json();
+            currentUsers = result.users;
+            displayUsers(currentUsers);
+        }
+
+        async function searchUser() {
+            const userId = document.getElementById("searchId").value;
+            if (!userId) { loadAllUsers(); return; }
+
+            const response = await fetch(`${SERVER_URL}/get-user?userId=${userId}`);
+            const result   = await response.json();
+
+            if (result.userId) {
+                currentUsers = [result];
+                displayUsers(currentUsers);
+            } else {
+                currentUsers = [];
+                document.getElementById("userTableBody").innerHTML =
+                    `<tr><td colspan="6" style="opacity:0.4;font-style:italic;padding:20px 14px;">No user found.</td></tr>`;
+            }
+        }
+
+        function displayUsers(users) {
+            const tbody = document.getElementById("userTableBody");
+            tbody.innerHTML = "";
+
+            if (users.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" style="opacity:0.4;font-style:italic;padding:20px 14px;">No users found.</td></tr>`;
+                return;
+            }
+
+            users.forEach(user => {
+                if (!user.events || user.events.length === 0) {
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                        <td>${user.name}</td>
+                        <td style="opacity:0.6">${user.email}</td>
+                        <td style="font-family:monospace;opacity:0.6">${user.userId}</td>
+                        <td colspan="3" style="opacity:0.3;font-style:italic;">No events registered</td>
+                    `;
+                    tbody.appendChild(tr);
+                } else {
+                    user.events.forEach((ev, index) => {
+                        const tr = document.createElement("tr");
+                        const selectId = `select-${user.userId}-${ev.event_name.replace(/\s/g, '')}`;
+
+                        if (index === 0) {
+                            tr.innerHTML = `
+                                <td rowspan="${user.events.length}">${user.name}</td>
+                                <td rowspan="${user.events.length}" style="opacity:0.6">${user.email}</td>
+                                <td rowspan="${user.events.length}" style="font-family:monospace;opacity:0.6">${user.userId}</td>
+                                <td>${ev.event_name}</td>
+                                <td>
+                                    <select id="${selectId}">
+                                        <option value="registered" ${ev.status==="registered"?"selected":""}>Registered</option>
+                                        <option value="attended"   ${ev.status==="attended"  ?"selected":""}>Attended</option>
+                                        <option value="certified"  ${ev.status==="certified" ?"selected":""}>Certified</option>
+                                    </select>
+                                </td>
+                                <td><button class="btn-ghost" onclick="updateStatus(${user.userId},'${ev.event_name}','${selectId}')">Update</button></td>
+                            `;
+                        } else {
+                            tr.innerHTML = `
+                                <td>${ev.event_name}</td>
+                                <td>
+                                    <select id="${selectId}">
+                                        <option value="registered" ${ev.status==="registered"?"selected":""}>Registered</option>
+                                        <option value="attended"   ${ev.status==="attended"  ?"selected":""}>Attended</option>
+                                        <option value="certified"  ${ev.status==="certified" ?"selected":""}>Certified</option>
+                                    </select>
+                                </td>
+                                <td><button class="btn-ghost" onclick="updateStatus(${user.userId},'${ev.event_name}','${selectId}')">Update</button></td>
+                            `;
+                        }
+                        tbody.appendChild(tr);
+                    });
+                }
+            });
+        }
+
+        async function updateStatus(userId, eventName, selectId) {
+            const status = document.getElementById(selectId).value;
+            const response = await fetch(`${SERVER_URL}/update-event-status`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ userId, event_name: eventName, status })
+            });
+            const result = await response.json();
+            if (result.message) { alert(`"${eventName}" → ${status}`); loadAllUsers(); }
+            else { alert("Error: " + result.error); }
+        }
+
+        function exportToCSV() {
+            if (currentUsers.length === 0) { alert("No data to export."); return; }
+            const rows = [["Name","Email","User ID","Event","Status"]];
+            currentUsers.forEach(user => {
+                if (!user.events || user.events.length === 0) {
+                    rows.push([user.name, user.email, user.userId, "", ""]);
+                } else {
+                    user.events.forEach(ev => rows.push([user.name, user.email, user.userId, ev.event_name, ev.status]));
+                }
+            });
+            const csv  = rows.map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(",")).join("\n");
+            const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+            const url  = URL.createObjectURL(blob);
+            const a    = document.createElement("a");
+            a.href = url;
+            a.download = `participants_${new Date().toISOString().slice(0,10)}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function logout() { window.location.href = "login.html"; }
+    </script>
+</body>
+</html>

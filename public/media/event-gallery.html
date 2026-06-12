@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="imsge/png" href="logo.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Events Gallery</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --border: #222222;
+      --accent: #ffffff;
+      --muted: #666666;
+      --hover-bg: #1a1a1a;
+      --btn-bg: #ffffff;
+      --btn-text: #0a0a0a;
+      --btn-hover: #d4d4d4;
+      --radius: 4px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--accent);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 3rem 2rem 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      letter-spacing: 0.08em;
+      line-height: 1;
+    }
+
+    main {
+      padding: 3rem 2rem 4rem;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .card {
+      flex: 1 1 calc(33.333% - 1rem);
+      min-width: 220px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+
+    .card:hover {
+      border-color: #444;
+      transform: translateY(-3px);
+    }
+
+    .card-img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      background: var(--border);
+    }
+
+    .card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .card:hover .card-img img {
+      transform: scale(1.04);
+    }
+
+    .card-body {
+      padding: 1.1rem 1.2rem 1.3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      flex: 1;
+    }
+
+    .event-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .event-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.45rem;
+      letter-spacing: 0.05em;
+      line-height: 1.1;
+    }
+
+    .event-date {
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .spacer {
+      flex: 1;
+    }
+
+    .insta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.6rem 1rem;
+      background: var(--btn-bg);
+      color: var(--btn-text);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: var(--radius);
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+
+    .insta-btn:hover {
+      background: var(--btn-hover);
+      transform: translateY(-1px);
+    }
+
+    .insta-btn.disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    @media (max-width: 860px) {
+      .card {
+        flex: 1 1 calc(50% - 0.75rem);
+      }
+    }
+
+    @media (max-width: 520px) {
+      .card {
+        flex: 1 1 100%;
+      }
+
+      main {
+        padding: 2rem 1rem 3rem;
+      }
+
+      header {
+        padding: 2rem 1rem 1.5rem;
+      }
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Events</h1>
+</header>
+
+<main>
+  <div class="gallery">
+
+    <!-- Card 1 -->
+    <div class="card">
+      <div class="card-img">
+        <img src="media/events/openguesssr.png" alt="Openguessr Championship">
+      </div>
+      <div class="card-body">
+        <span class="event-label">Completed</span>
+        <span class="event-name">Openguessr Championship</span>
+        <span class="event-date">20/07/2025 · 4:00 PM<br>Google Meet</span>
+        <div class="spacer"></div>
+        <a class="insta-btn" href="https://drive.google.com/file/d/16sFFQBkClLmD2u6tqxuvb-9IvA7lA98-/view?usp=drive_link" target="_blank">
+          View Details
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card">
+      <div class="card-img">
+        <img src="media/events/mythQuiz.png" alt="The Odyssey - Mythology Quiz">
+      </div>
+      <div class="card-body">
+        <span class="event-label">Completed</span>
+        <span class="event-name">The Odyssey - Mythology Quiz</span>
+        <span class="event-date">03/08/2025 · 5:00 PM<br>Google Meet</span>
+        <div class="spacer"></div>
+        <a class="insta-btn" href="https://drive.google.com/file/d/1RcbEYZpzDvEtWKy3g0XmWV32b7qblwmr/view?usp=drive_link" target="_blank">
+          View Details
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card">
+      <div class="card-img">
+        <img src="media/events/coolie.png" alt="Lokesh Kanakaraj Quiz and Coolie movie discussion">
+      </div>
+      <div class="card-body">
+        <span class="event-label">Completed</span>
+        <span class="event-name">Lokesh Kanakaraj Quiz & Coolie Discussion</span>
+        <span class="event-date">23/08/2025 · 8:00 PM<br>Google Meet</span>
+        <div class="spacer"></div>
+        <a class="insta-btn" href="https://drive.google.com/file/d/1sAGmlnnk3dn84MTvuI7r4eQFl2Qb_jxg/view?usp=drive_link" target="_blank">
+          View Details
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="card">
+      <div class="card-img">
+        <img src="media/events/soundcheck.png" alt="Sound Check - Music Quiz">
+      </div>
+      <div class="card-body">
+        <span class="event-label">Completed</span>
+        <span class="event-name">Sound Check - Music Quiz</span>
+        <span class="event-date">22/09/2025 · 4:45 PM<br>Red Building Room 75</span>
+        <div class="spacer"></div>
+        <a class="insta-btn" href="https://drive.google.com/file/d/1KqVUkLNumYPtws1CQ-ZdRQVc6X23TD1a/view?usp=drive_link" target="_blank">
+          View Details
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="card">
+      <div class="card-img">
+        <img src="media/events/Icebreaker.jpg" alt="Icebreaker25's Quiz">
+      </div>
+      <div class="card-body">
+        <span class="event-label">Completed</span>
+        <span class="event-name">Icebreaker25's Quiz</span>
+        <span class="event-date">07/10/2025 · 1:00 PM<br>Turing Hall, DCSE</span>
+        <div class="spacer"></div>
+        <a class="insta-btn" href="https://drive.google.com/file/d/1w3GgwzjRr6QYpUCssbqJ0Eh4QQdf9xVg/view?usp=drive_link" target="_blank">
+          View Details
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="card">
+      <div class="card-img">
+        <img src="media/events/arena.jpg" alt="Arena Sports & Gaming Quiz">
+      </div>
+      <div class="card-body">
+        <span class="event-label">Completed</span>
+        <span class="event-name">Arena Sports & Gaming Quiz</span>
+        <span class="event-date">10/10/2025 · 10:30 AM<br>Red Building Room 75</span>
+        <div class="spacer"></div>
+        <span class="insta-btn disabled">Details Unavailable</span>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  &copy;2026 QUIZZERS ANONYMOUS · All rights reserved
+</footer>
+
+</body>
+</html>
+
