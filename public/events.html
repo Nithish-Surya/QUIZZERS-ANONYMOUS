@@ -208,7 +208,7 @@
         document.getElementById("username").innerText = name;
 
         async function loadEvents() {
-            const response  = await fetch(`${SERVER_URL}/get-events`);
+            const response  = await fetch(`${SERVER_URL}/api/get-events`);
             const result    = await response.json();
             const container = document.getElementById("eventCheckboxes");
             container.innerHTML = "";
