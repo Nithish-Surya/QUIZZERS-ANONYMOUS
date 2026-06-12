@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QUIZZERS ANONYMOUS</title>
+  <link rel="icon" type="imsge/png" href="/logo.png">
+
+
+  <link rel="stylesheet" href="/style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
+  <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/pnltri.min.js"></script>
+
+  <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/FontUtils.js"></script>
+  <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/TextGeometry.js"></script>
+  <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/droid_sans_bold.typeface.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r75/examples/js/controls/OrbitControls.js"></script>
+  
+  <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/bas.js"></script>
+   </head>
+<body>
+
+  <script>
+    THREE.ShapeUtils.triangulateShape = (function() {
+        var pnlTriangulator = new PNLTRI.Triangulator();
+        return function triangulateShape(contour, holes) {
+            return pnlTriangulator.triangulate_polygon([contour].concat(holes));
+        };
+    })();
+  </script>
+
+  <div id="three-container"></div>
+
+  <div id="instructions">
+    
+  </div>
+
+  
+
+  <div class="nav">
+    <img id="logo" src="/logo_t.png" alt="QUIZZERS ANONYMOUS">
+
+    <ul>
+      
+      <div class="nav-link">
+      <li><a href="#">HOME</a></li>
+      <li><a href="/event-gallery.html">EVENTS</a></li>
+      <li><a href="/quiz.html">QUIZ</a></li>
+      <li><a href="/about.html">ABOUT</a></li>
+      <li><a href="/contact.html">CONTACT </a></li>
+      </div>
+    </ul>
+    <button class="reg"><a href="/login.html">LOGIN</a></button>
+  </div>
+
+  
+
+
+  <script src="/final.js"></script>
+
+</body>
+</html>
