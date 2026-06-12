@@ -203,7 +203,7 @@
         document.getElementById("userAvatar").innerText = name ? name.charAt(0).toUpperCase() : "?";
 
         async function loadEvents() {
-            const response = await fetch(`${SERVER_URL}/get-user?userId=${userId}`);
+            const response = await fetch(`${SERVER_URL}/api/get-user?userId=${userId}`);
             const result   = await response.json();
             const list = document.getElementById("eventList");
 
