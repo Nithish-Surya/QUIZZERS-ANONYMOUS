@@ -254,7 +254,7 @@
                 return;
             }
 
-            const response = await fetch(`${SERVER_URL}/save-events`, {
+            const response = await fetch(`${SERVER_URL}/api/save-events`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ userId: parseInt(userId), events: selectedEvents })
