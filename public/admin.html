@@ -272,7 +272,7 @@
             const event_name = document.getElementById("newEventName").value.trim();
             if (!event_name) { alert("Please enter an event name!"); return; }
 
-            const response = await fetch(`${SERVER_URL}/add-event`, {
+            const response = await fetch(`${SERVER_URL}/api/add-event`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ event_name })
@@ -291,7 +291,7 @@
         async function deleteEvent(event_name) {
             if (!confirm(`Delete "${event_name}"?`)) return;
 
-            const response = await fetch(`${SERVER_URL}/delete-event`, {
+            const response = await fetch(`${SERVER_URL}/api/delete-event`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ event_name })
@@ -303,7 +303,7 @@
 
         async function loadAllUsers() {
             document.getElementById("searchId").value = "";
-            const response = await fetch(`${SERVER_URL}/get-all-users`);
+            const response = await fetch(`${SERVER_URL}/api/get-all-users`);
             const result   = await response.json();
             currentUsers = result.users;
             displayUsers(currentUsers);
@@ -313,7 +313,7 @@
             const userId = document.getElementById("searchId").value;
             if (!userId) { loadAllUsers(); return; }
 
-            const response = await fetch(`${SERVER_URL}/get-user?userId=${userId}`);
+            const response = await fetch(`${SERVER_URL}/api/get-user?userId=${userId}`);
             const result   = await response.json();
 
             if (result.userId) {
@@ -386,7 +386,7 @@
 
         async function updateStatus(userId, eventName, selectId) {
             const status = document.getElementById(selectId).value;
-            const response = await fetch(`${SERVER_URL}/update-event-status`, {
+            const response = await fetch(`${SERVER_URL}/api/update-event-status`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ userId, event_name: eventName, status })
