@@ -168,7 +168,7 @@
             msg.className = "";
             msg.innerText = "Creating account...";
 
-            const response = await fetch(`${SERVER_URL}/register`, {
+            const response = await fetch(`${SERVER_URL}/api/register`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(user)
