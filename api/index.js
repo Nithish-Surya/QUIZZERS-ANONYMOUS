@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
     events: [
         {
             event_name: { type: String },
-            status:     { type: String, default: "registered" }
+            status:     { type: Number, default: 0 }
         }
     ]
 });
@@ -139,7 +139,7 @@ app.post('/api/update-event-status', async (req, res) => {
         if (!event) return res.status(400).json({ error: 'Event not found!' });
         event.status = status;
         await user.save();
-        res.json({ message: 'Status updated successfully!', events: user.events });
+        res.json({ message: 'Score updated successfully!', events: user.events });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
