@@ -243,7 +243,7 @@
             const checkboxes     = document.querySelectorAll('input[type="checkbox"]:checked');
             const selectedEvents = Array.from(checkboxes).map(cb => ({
                 event_name: cb.value,
-                status:     "registered"
+                status:     0
             }));
 
             const msg = document.getElementById("msg");
