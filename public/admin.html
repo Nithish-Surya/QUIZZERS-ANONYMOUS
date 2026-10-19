@@ -229,7 +229,7 @@
                         <th>Email</th>
                         <th>User ID</th>
                         <th>Event</th>
-                        <th>Status</th>
+                        <th>Score</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -268,7 +268,7 @@
             });
         }
 
-        async function addEvent() {
+    /*    async function addEvent() {
             const event_name = document.getElementById("newEventName").value.trim();
             if (!event_name) { alert("Please enter an event name!"); return; }
 
@@ -300,7 +300,7 @@
             if (result.message) { loadAvailableEvents(); }
             else { alert("Error: " + result.error); }
         }
-
+*/
         async function loadAllUsers() {
             document.getElementById("searchId").value = "";
             const response = await fetch(`${SERVER_URL}/api/get-all-users`);
@@ -327,62 +327,55 @@
         }
 
         function displayUsers(users) {
-            const tbody = document.getElementById("userTableBody");
-            tbody.innerHTML = "";
+    const tbody = document.getElementById("userTableBody");
+    tbody.innerHTML = "";
 
-            if (users.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" style="opacity:0.4;font-style:italic;padding:20px 14px;">No users found.</td></tr>`;
-                return;
-            }
+    if (users.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" style="opacity:0.4;font-style:italic;padding:20px 14px;">No users found.</td></tr>`;
+        return;
+    }
 
-            users.forEach(user => {
-                if (!user.events || user.events.length === 0) {
-                    const tr = document.createElement("tr");
+    users.forEach(user => {
+        if (!user.events || user.events.length === 0) {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td>${user.name}</td>
+                <td style="opacity:0.6">${user.email}</td>
+                <td style="font-family:monospace;opacity:0.6">${user.userId}</td>
+                <td colspan="3" style="opacity:0.3;font-style:italic;">No events registered</td>
+            `;
+            tbody.appendChild(tr);
+        } else {
+            user.events.forEach((ev, index) => {
+                const tr = document.createElement("tr");
+                const selectId = `select-${user.userId}-${ev.event_name.replace(/\s/g, '')}`;
+                const statusVal = ev.status !== undefined && ev.status !== null ? ev.status : 0;
+
+                if (index === 0) {
                     tr.innerHTML = `
-                        <td>${user.name}</td>
-                        <td style="opacity:0.6">${user.email}</td>
-                        <td style="font-family:monospace;opacity:0.6">${user.userId}</td>
-                        <td colspan="3" style="opacity:0.3;font-style:italic;">No events registered</td>
+                        <td rowspan="${user.events.length}">${user.name}</td>
+                        <td rowspan="${user.events.length}" style="opacity:0.6">${user.email}</td>
+                        <td rowspan="${user.events.length}" style="font-family:monospace;opacity:0.6">${user.userId}</td>
+                        <td>${ev.event_name}</td>
+                        <td>
+                            <input type="number" id="${selectId}" value="${statusVal}" min="0" style="width: 80px; padding: 6px 10px; background: #000; border: 1px solid rgba(255,255,255,0.4); color: #fff; font-family: 'Lato', sans-serif;">
+                        </td>
+                        <td><button class="btn-ghost" onclick="updateStatus(${user.userId},'${ev.event_name}','${selectId}')">Update</button></td>
                     `;
-                    tbody.appendChild(tr);
                 } else {
-                    user.events.forEach((ev, index) => {
-                        const tr = document.createElement("tr");
-                        const selectId = `select-${user.userId}-${ev.event_name.replace(/\s/g, '')}`;
-
-                        if (index === 0) {
-                            tr.innerHTML = `
-                                <td rowspan="${user.events.length}">${user.name}</td>
-                                <td rowspan="${user.events.length}" style="opacity:0.6">${user.email}</td>
-                                <td rowspan="${user.events.length}" style="font-family:monospace;opacity:0.6">${user.userId}</td>
-                                <td>${ev.event_name}</td>
-                                <td>
-                                    <select id="${selectId}">
-                                        <option value="registered" ${ev.status==="registered"?"selected":""}>Registered</option>
-                                        <option value="attended"   ${ev.status==="attended"  ?"selected":""}>Attended</option>
-                                        <option value="certified"  ${ev.status==="certified" ?"selected":""}>Certified</option>
-                                    </select>
-                                </td>
-                                <td><button class="btn-ghost" onclick="updateStatus(${user.userId},'${ev.event_name}','${selectId}')">Update</button></td>
-                            `;
-                        } else {
-                            tr.innerHTML = `
-                                <td>${ev.event_name}</td>
-                                <td>
-                                    <select id="${selectId}">
-                                        <option value="registered" ${ev.status==="registered"?"selected":""}>Registered</option>
-                                        <option value="attended"   ${ev.status==="attended"  ?"selected":""}>Attended</option>
-                                        <option value="certified"  ${ev.status==="certified" ?"selected":""}>Certified</option>
-                                    </select>
-                                </td>
-                                <td><button class="btn-ghost" onclick="updateStatus(${user.userId},'${ev.event_name}','${selectId}')">Update</button></td>
-                            `;
-                        }
-                        tbody.appendChild(tr);
-                    });
+                    tr.innerHTML = `
+                        <td>${ev.event_name}</td>
+                        <td>
+                            <input type="number" id="${selectId}" value="${statusVal}" min="0" style="width: 80px; padding: 6px 10px; background: #000; border: 1px solid rgba(255,255,255,0.4); color: #fff; font-family: 'Lato', sans-serif;">
+                        </td>
+                        <td><button class="btn-ghost" onclick="updateStatus(${user.userId},'${ev.event_name}','${selectId}')">Update</button></td>
+                    `;
                 }
+                tbody.appendChild(tr);
             });
         }
+    });
+}
 
         async function updateStatus(userId, eventName, selectId) {
             const status = document.getElementById(selectId).value;
