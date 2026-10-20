@@ -290,6 +290,7 @@ app.get('/api/get-user', async (req, res) => {
 
         res.json({
             name: user.name,
+            email: user.email,
             userId: user.userId,
             events: user.events
         });
