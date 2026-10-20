@@ -6,32 +6,45 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            width: 100%;
+            min-height: 100%;
+        }
 
         body {
             background: #000;
             color: #fff;
             font-family: "Lato", sans-serif;
             min-height: 100vh;
+            min-height: 100dvh;
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 40px;
+            padding: clamp(20px, 5vw, 40px);
+            overflow-x: hidden;
         }
 
         .card {
             width: 100%;
             max-width: 400px;
+            margin: 0 auto;
         }
 
         .card-header {
             border-bottom: 1px solid #fff;
-            padding-bottom: 20px;
-            margin-bottom: 40px;
+            padding-bottom: clamp(16px, 4vw, 20px);
+            margin-bottom: clamp(28px, 7vw, 40px);
         }
 
         .card-header p {
-            font-size: 11px;
+            font-size: clamp(9px, 2.5vw, 11px);
             font-weight: 700;
             letter-spacing: 0.2em;
             text-transform: uppercase;
@@ -40,17 +53,20 @@
         }
 
         .card-header h1 {
-            font-size: 28px;
+            font-size: clamp(24px, 7vw, 28px);
             font-weight: 900;
             letter-spacing: 0.06em;
             text-transform: uppercase;
+            line-height: 1.15;
         }
 
-        .field { margin-bottom: 16px; }
+        .field {
+            margin-bottom: clamp(14px, 4vw, 16px);
+        }
 
         .field label {
             display: block;
-            font-size: 10px;
+            font-size: clamp(9px, 2.5vw, 10px);
             font-weight: 700;
             letter-spacing: 0.2em;
             text-transform: uppercase;
@@ -60,23 +76,35 @@
 
         .field input {
             width: 100%;
+            height: 46px;
             background: #000;
             border: 1px solid rgba(255,255,255,0.4);
+            border-radius: 0;
             color: #fff;
             font-family: "Lato", sans-serif;
-            font-size: 14px;
-            padding: 12px 14px;
+            font-size: 16px;
+            padding: 11px 13px;
             outline: none;
             transition: border-color 0.15s, box-shadow 0.15s;
+            -webkit-appearance: none;
+            appearance: none;
         }
 
-        .field input::placeholder { color: rgba(255,255,255,0.2); }
-        .field input:focus { border-color: #fff; box-shadow: 0 0 0 1px #fff; }
+        .field input::placeholder {
+            color: rgba(255,255,255,0.2);
+        }
+
+        .field input:focus {
+            border-color: #fff;
+            box-shadow: 0 0 0 1px #fff;
+        }
 
         button {
             width: 100%;
+            min-height: 46px;
             background: #fff;
             border: 1px solid #fff;
+            border-radius: 0;
             color: #000;
             font-family: "Lato", sans-serif;
             font-size: 13px;
@@ -87,37 +115,115 @@
             cursor: pointer;
             margin-top: 8px;
             transition: background 0.15s, color 0.15s;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        button:hover { background: #000; color: #fff; }
+        button:hover {
+            background: #000;
+            color: #fff;
+        }
+
+        button:active {
+            background: #000;
+            color: #fff;
+        }
 
         #msg {
             margin-top: 16px;
-            font-size: 12px;
+            font-size: clamp(11px, 3vw, 12px);
+            line-height: 1.5;
             letter-spacing: 0.06em;
             opacity: 0.6;
             text-align: center;
             min-height: 18px;
         }
 
-        #msg.error { opacity: 1; text-decoration: underline; }
+        #msg.error {
+            opacity: 1;
+            text-decoration: underline;
+        }
 
         .card-footer {
-            margin-top: 24px;
+            margin-top: clamp(20px, 5vw, 24px);
             text-align: center;
         }
 
         .card-footer a {
-            font-size: 12px;
+            display: inline-block;
+            font-size: clamp(11px, 3vw, 12px);
             color: rgba(255,255,255,0.4);
             text-decoration: none;
             letter-spacing: 0.05em;
             border-bottom: 1px solid rgba(255,255,255,0.2);
-            padding-bottom: 1px;
+            padding-bottom: 2px;
             transition: color 0.15s, border-color 0.15s;
         }
 
-        .card-footer a:hover { color: #fff; border-color: #fff; }
+        .card-footer a:hover {
+            color: #fff;
+            border-color: #fff;
+        }
+
+        /* Mobile phones */
+        @media (max-width: 480px) {
+            body {
+                padding: 24px 20px;
+                align-items: center;
+            }
+
+            .card {
+                max-width: 100%;
+            }
+
+            .card-header {
+                margin-bottom: 30px;
+            }
+
+            .field input {
+                height: 48px;
+                padding: 12px 13px;
+            }
+
+            button {
+                min-height: 48px;
+            }
+        }
+
+        /* Very small phones */
+        @media (max-width: 360px) {
+            body {
+                padding: 20px 16px;
+            }
+
+            .card-header h1 {
+                font-size: 23px;
+            }
+
+            .card-header {
+                margin-bottom: 26px;
+            }
+
+            .field {
+                margin-bottom: 14px;
+            }
+
+            .field input {
+                height: 46px;
+            }
+
+            button {
+                min-height: 46px;
+            }
+        }
+
+        /* Landscape phones */
+        @media (max-height: 500px) and (orientation: landscape) {
+            body {
+                align-items: flex-start;
+                padding-top: 24px;
+                padding-bottom: 24px;
+            }
+        }
     </style>
 </head>
 <body>
